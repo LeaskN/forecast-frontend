@@ -1,0 +1,16 @@
+.address_input{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+
+.row{
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.row #country{
+  width: 177px;
+}
