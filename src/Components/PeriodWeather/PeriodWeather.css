@@ -1,0 +1,20 @@
+.periodWeatherCard{
+  box-shadow: 0px 0px 3px 3px #333333;
+  width: 400px;
+  border-radius:40px;
+  margin: 10px;
+  padding: 10px;
+  background-size: cover;
+}
+
+.daytime{
+  color: var(--primary-color);
+  text-shadow: 1px 1px 1px var(--secondary-color);
+  background-color: var(--secondary-color);
+}
+
+.nightTime{
+  color: var(--secondary-color);
+  text-shadow: 1px 1px 1px var(--primary-color);
+  background-color: var(--primary-color);
+}
