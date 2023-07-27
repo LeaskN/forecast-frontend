@@ -20,6 +20,7 @@ export default function UserLocationInput({
 
   return (
     <div className="address_input">
+      <h2>Address</h2>
       <div className="row">
         <label htmlFor="street">Street</label>
         <input
@@ -74,6 +75,7 @@ export default function UserLocationInput({
         </select>
       </div>
       <button onClick={() => onClick(userAddress)}>Submit</button>
+      <br/>
     </div>
   );
 };
