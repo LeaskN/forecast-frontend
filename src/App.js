@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import UserLocationInput from './Components/UserLocationInput';
+import PeriodWeather from './Components/PeriodWeather/PeriodWeather';
 
 function App() {
   const [userLocation, setUserLocation] = useState(null);
@@ -44,7 +45,7 @@ function App() {
       const city = userAddress.city.split(' ').join('+');
       const state = userAddress.state.split(' ').join('+');
 
-      await fetch(`http://localhost:8080/latlon/?street=${street}&city=${city}&state=${state}&benchmark=Public_AR_Census2020&vintage=Census2020_Census2020&layers=10&format=json`)
+      await fetch(`https://weather-backend-1dcb6a57dec1.herokuapp.com/latlon/?street=${street}&city=${city}&state=${state}&benchmark=Public_AR_Census2020&vintage=Census2020_Census2020&layers=10&format=json`)
         .then(res => res.json())
         .then(res =>{
           setUserLatLon({
@@ -56,7 +57,7 @@ function App() {
   
   const getWeather = async () => {
     if (userAddress.street && userAddress.city && userAddress.state) {
-      await fetch(`http://localhost:8080/weather/?lat=${userLatLon.lat}&lng=${userLatLon.lng}`)
+      await fetch(`https://weather-backend-1dcb6a57dec1.herokuapp.com/weather/?lat=${userLatLon.lat}&lng=${userLatLon.lng}`)
         .then(res => res.json())
         .then(res => setUpcomingForcast(res.properties.periods));
     }
@@ -79,37 +80,9 @@ function App() {
         /> :
         <CheckUserAddress />}
       {userLatLon?.lng ? `lat: ${userLatLon.lat}lng: ${userLatLon.lng}` : ''}
-      <div style={{
-       display: 'flex',
-       justifyContent: 'space-evenly',
-       alignItems: 'center',
-       flexWrap: 'wrap',
-      }}>
+      <div className='periodWeatherContainer' >
       {upcomingForcast.length > 0 ? 
-        upcomingForcast.map((period) => 
-          <div style={{
-            border: '3px solid blue',
-            width: '400px',
-            borderRadius:'40px',
-            backgroundColor: `${period.isDaytime ? 'white' : 'black'}`,
-            color: `${period.isDaytime ? 'black' : 'white'}`,
-            margin: '10px',
-            backgroundImage: `url('${period.icon}')`,
-            backgroundSize: 'cover',
-            textShadow: `1px 1px 1px ${period.isDaytime ? 'white' : 'black'}`
-           }}>
-            <img style={{borderRadius: '5px', border:'3px solid blue'}} src={period.icon} alt='periodIcon'/>
-            <p>{period.name}</p>
-            <p>{period.temperature}{period.temperatureUnit}&deg;</p>
-            <p>Wind: {period.windSpeed} {period.windDirection}</p>
-            <p>Dewpoint: {Math.round(period.dewpoint.value)}&deg; {period.dewpoint.unitCode.slice(-1)}</p>
-            <p>{period.shortForecast}</p>
-            {period.isDaytime ? <p>Day Time!</p> : <p>Night Time!</p>}
-            <p>{period.probabilityOfPrecipitation?.value}% Chance of Precipitation</p>
-            <p>{period.relativeHumidity?.value}% Humidity</p>
-            <p>{period.detailedForecast}</p>
-          </div>
-        )
+        upcomingForcast.map((period) => <PeriodWeather period={period}/>)
       : ''}
       </div>
     </div>
@@ -126,4 +99,3 @@ function CheckUserAddress({ checkAddress, address }) {
 }
 
 export default App;
-
