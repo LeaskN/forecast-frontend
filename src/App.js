@@ -110,38 +110,6 @@ function App() {
             <p>{period.detailedForecast}</p>
           </div>
         )
-        /*
-unitCode
-: 
-"wmoUnit:percent"
-value
-: 
-92
-[[Prototype]]
-: 
-Object
-shortForecast
-: 
-"Scattered Showers And Thunderstorms"
-startTime
-: 
-"2023-07-26T19:00:00-04:00"
-temperature
-: 
-77
-temperatureTrend
-: 
-null
-temperatureUnit
-: 
-"F"
-windDirection
-: 
-"ENE"
-windSpeed
-: 
-"7 mph"
-        */
       : ''}
       </div>
     </div>
