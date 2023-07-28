@@ -1,20 +1,23 @@
 {
   "compilerOptions": {
     "jsx": "react",
+    "target": "ES6",
     // project options
     "lib": [
-      "ESNext",
-      "dom"
+      "dom",
+      "dom.iterable",
+      "esnext"
     ], // specifies which default set of type definitions to use ("DOM", "ES6", etc.)
     "outDir": "lib", // .js (as well as .d.ts, .js.map, etc.) The directory where your files will be created
     "removeComments": true, // Strips all comments from TypeScript files when converting to JavaScript
-    "target": "ES6", // Target environment
 
     // Module resolution
     "baseUrl": "./", // Lets you set a base directory to resolve non-absolute module names
     "esModuleInterop": true, // fixes some issues TS originally had with the ES6 spec where TypeScript treats CommonJS/AMD/UMD modules similar to ES6 modules
     "moduleResolution": "node", // Pretty much always Node for modern JS. Other option is "classic"
     "paths": {}, // A series of entries which re-map imports to lookup locations relative to the baseUrl
+    "module": "esnext",
+
 
     // Source Map
     "sourceMap": true, // enables the use of source maps for debuggers and error reporting, etc.
@@ -25,6 +28,7 @@
     "allowUnreachableCode": false, // pick up dead code paths
     "noImplicitAny": true, // TypeScript will fall back to a type of any for a variable when it cannot infer the type
     "strictNullChecks": true, // When strictNullChecks is true, null and undefined have their own distinct types and you’ll get a type error if you try to use them where a concrete value is expected
+    "strict": true,
 
     // Linter Checks
     "noImplicitReturns": true,
@@ -35,5 +39,6 @@
   "include": ["src/**/*"],
   "exclude": [
     "node_modules/**/*"
-  ]
+  ],
+  "allowImportingTsExtensions": true
 }
