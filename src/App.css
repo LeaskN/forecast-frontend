@@ -1,18 +1,13 @@
 :root{
   overflow-x: hidden;
-  --bg-color: #1b1b1b;
-  --primary-color: #0d0d0d;
-  --secondary-color: #fff;
-  --text-color: #fff;
-  --text-color-2: #fff;
-  --text-color-3: #00ffff;
-  --overlay-color: rgb(12 12 12 / 80%);
+  --bg-color: 27, 27, 27;
+  --primary-color: 13, 13, 13;
+  --secondary-color: 255, 255, 255;
+  --text-color: 255, 255, 255;
+  --text-color-2: 255, 255, 255;
+  --text-color-3: 0, 255, 255;
 }
 
-html{
-  background-color: var(--bg-color);
-  color: var(--secondary-color);
-}
 .App {
   text-align: center;
   max-width: 1200px;
@@ -31,18 +26,18 @@ html{
 }
 
 .App-header {
-  background-color: var(--bg-color);
+  background-color: rgba(var(--bg-color));
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: var(--secondary-color);
+  color: rgba(var(--secondary-color));
 }
 
 .App-link {
-  color: var(--text-color-3);
+  color: rgba(var(--text-color-3));
 }
 
 @keyframes App-logo-spin {
@@ -60,6 +55,7 @@ html{
   align-items: center;
   flex-wrap: wrap;
 }
+
 .periodWeatherContainer >div {
   flex: 40%
 }

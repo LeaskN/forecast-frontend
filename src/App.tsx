@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import UserLocationInput from './Components/UserLocationInput/UserLocationInput';
 import PeriodWeather from './Components/PeriodWeather/PeriodWeather';
 import Spinner from './Components/Spinner/Spinner';
-
+import Clouds from './Components/Clouds/Clouds';
 interface UserAddress {
   street: string;
   city: string;
@@ -84,6 +84,7 @@ function App() {
 
   return (
     <div className="App">
+      <Clouds />
       <UserLocationInput street='' city='' state='' zipcode='' onClick={(userAddress:UserAddress) => {setUserAddress(userAddress)}}/> 
       {userCityFromBrowser?.locality && userAddress?.city === '' ? userCityFromBrowser.locality : ''}
       {userAddress?.city?.length > 0 ? userAddress.city : ''}
