@@ -29,7 +29,7 @@ const UserLocationInput = ({
 
   return (
     <div className="address_input">
-      <h2>United States Address:</h2>
+      <h4>To get upcoming forecast enter an address below:</h4>
       <div className="row">
         <label htmlFor="street">Street</label>
         <input
@@ -41,7 +41,6 @@ const UserLocationInput = ({
       </div>
 
       <div className="row">
-
         <label htmlFor="city">City</label>
         <input
           type="text"
@@ -50,8 +49,8 @@ const UserLocationInput = ({
           onChange={(e) => updateUserAddress(e.target)}
         />
       </div>
-      <div className="row">
 
+      <div className="row">
         <label htmlFor="state">State</label>
         <input
           type="text"
@@ -60,8 +59,8 @@ const UserLocationInput = ({
           onChange={(e) => updateUserAddress(e.target)}
         />
       </div>
-      <div className="row">
 
+      <div className="row">
         <label htmlFor="zipcode">Zipcode</label>
         <input
           type="text"
@@ -70,8 +69,10 @@ const UserLocationInput = ({
           onChange={(e) => updateUserAddress(e.target)}
         />
       </div>
+
       <button onClick={() => onClick(userAddress)}>Submit</button>
       <br/>
+
     </div>
   );
 };
