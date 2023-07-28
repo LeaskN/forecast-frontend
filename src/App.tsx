@@ -16,14 +16,13 @@ interface UserLatLon{
 }
 
 function App() {
-  const [userUpcomingForecast, setUserUpcomingForecast] = useState(null);
   const [userAddress, setUserAddress] = useState<UserAddress>({ street: '', city: '', state: '',   zipcode: ''});
   const [userLatLon, setUserLatLon] = useState<UserLatLon>({lat: '', lng: ''});
   const [upcomingForcast, setUpcomingForcast] = useState([])
 
   useEffect(() => {
     const successCallback = (position: any) => {
-      setUserUpcomingForecast(position);
+      setUpcomingForcast(position);
     };
 
     const errorCallback = (error: any) => {
@@ -35,7 +34,7 @@ function App() {
 
   useEffect(() => {
     getAddressFromLatLng();
-  }, [userUpcomingForecast]);
+  }, [upcomingForcast]);
 
 
   useEffect(() => {
@@ -48,11 +47,6 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userAddress]);
   
-  useEffect(() => {
-    console.log(upcomingForcast);
-  }, [upcomingForcast]);
-
-
   const getLatLngFromAddress = async () => {
     if (userAddress?.street && userAddress?.city && userAddress?.state) {
       const street = userAddress?.street.split(' ').join('+');
