@@ -6,7 +6,6 @@ interface Props {
   city: string;
   state: string;
   zipcode: string;
-  country: string;
   onClick: Function;
 }
 
@@ -16,14 +15,10 @@ interface Target {
 }
 
 const UserLocationInput = ({
-  street,
-  city,
-  state,
-  zipcode,
-  country,
-  onClick,
-}: Props) => {
-  const [userAddress, setUserAddress] = useState({street, city, state, zipcode, country})
+    onClick,
+  }: Props) => {
+
+  const [userAddress, setUserAddress] = useState({street:'', city:'', state:'', zipcode:''})
 
   const updateUserAddress = useCallback((target: Target) => {
     setUserAddress((prevUserAddress) => ({
@@ -40,7 +35,7 @@ const UserLocationInput = ({
         <input
           type="text"
           id="street"
-          value={street}
+          value={userAddress.street}
           onChange={(e) => updateUserAddress(e.target)}
         />
       </div>
@@ -51,7 +46,7 @@ const UserLocationInput = ({
         <input
           type="text"
           id="city"
-          value={city}
+          value={userAddress.city}
           onChange={(e) => updateUserAddress(e.target)}
         />
       </div>
@@ -61,7 +56,7 @@ const UserLocationInput = ({
         <input
           type="text"
           id="state"
-          value={state}
+          value={userAddress.state}
           onChange={(e) => updateUserAddress(e.target)}
         />
       </div>
@@ -71,7 +66,7 @@ const UserLocationInput = ({
         <input
           type="text"
           id="zipcode"
-          value={zipcode}
+          value={userAddress.zipcode}
           onChange={(e) => updateUserAddress(e.target)}
         />
       </div>
