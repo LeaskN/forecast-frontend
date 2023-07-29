@@ -18,11 +18,13 @@ body {
   z-index: -1;
 }
 
+
+
 /* KEYFRAMES */
 
 @-webkit-keyframes animateCloud {
   0% {
-    margin-left: -1000px;
+    margin-left: -750px;
   }
 
   100% {
@@ -32,7 +34,7 @@ body {
 
 @-moz-keyframes animateCloud {
   0% {
-    margin-left: -1000px;
+    margin-left: -750px;
   }
 
   100% {
@@ -42,7 +44,7 @@ body {
 
 @keyframes animateCloud {
   0% {
-    margin-left: -1000px;
+    margin-left: -750px;
   }
 
   100% {
