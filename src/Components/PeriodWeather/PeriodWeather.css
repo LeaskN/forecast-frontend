@@ -8,18 +8,28 @@
   display: flex;
   justify-content: space-evenly;
   height: 50px;
+  max-height: 50px;
+  flex-wrap: wrap;
+  overflow-y: hidden;
+  transition: 1s ease;
+}
+
+.periodWeatherCard .hover{
+  transition: 3s ease;
+  height: 100%;
+  max-height: 1000px;
 }
 
 .daytime{
   color: rgba(var(--primary-color));
   text-shadow: 1px 1px 1px rgba(var(--secondary-color));
-  background-color: rgba(var(--secondary-color), .8);
+  background-color: rgba(var(--secondary-color), 1);
 }
 
 .nightTime{
   color: rgba(var(--secondary-color));
   text-shadow: 1px 1px 1px rgba(var(--primary-color));
-  background-color: rgba(var(--primary-color), .8);
+  background-color: rgba(var(--primary-color), 1);
 }
 
 .periodName{
@@ -27,9 +37,7 @@
   text-transform: capitalize;
   font-weight: 500;
   margin: auto;
-  padding: 10px;
   max-width: 75px;
-  font-size: 12px;
 }
 
 .column{
@@ -45,10 +53,19 @@
   flex: 1;
   width: 40px;
 }
+
 .secondCol{
   flex: 1;
   width: 40px;
 }
+
 .thirdCol{
   flex: 4;
+}
+
+.periodRow1{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
 }

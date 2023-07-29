@@ -1,9 +1,9 @@
 import ProgressBar from '../ProgressBar/ProgressBar';
 import './PeriodWeather.css';
-import React from 'react'
+import React, { useState } from 'react'
 import IconPicker from '../IconPicker/IconPicker';
 
-interface Props{
+interface Props {
   period: {
     icon: string;
     name: string;
@@ -27,25 +27,50 @@ interface Props{
   }
 }
 
-const PeriodWeather = ( { period } : Props ) => {
-  const weatherInfo:string | undefined = period?.icon?.indexOf('day') > -1? period?.icon?.split('day')[1] : period?.icon?.split('night')[1];
-  const weather: string | undefined = weatherInfo?.split('/')?.[1]?.split(',')[0];
-  const day: string | undefined = period?.icon?.indexOf('night') > -1 ? 'night' : 'day'; 
-  
-  return (
-  <div className={`periodWeatherCard ${period?.isDaytime ? 'daytime' : 'nightTime'}`} >
-  <div className='column firstCol'>
-    <div className='periodName'>{period?.name}</div>
-  </div>
-  <div className='column secondCol'>
-    {weather ? <IconPicker weather={weather} time={day} /> : ''}
-    <div>{period?.probabilityOfPrecipitation?.value > 0? period?.probabilityOfPrecipitation?.value + '%' : ''}</div>
-  </div>
+const PeriodWeather = ({ period }: Props) => {
+  const [hover, setHover] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
-  <div className='column thirdCol'>
-    <ProgressBar temp={period.temperature} />
-  </div>
-</div>)
+  const handleMouseEvent = () => {
+    setHover(!hover);
+  };
+  const handleClickEvent = () => {
+    setClicked(!clicked);
+  };
+
+  const weatherInfo: string | undefined = period?.icon?.indexOf('day') > -1 ? period?.icon?.split('day')[1] : period?.icon?.split('night')[1];
+  const weather: string | undefined = weatherInfo?.split('/')?.[1]?.split(',')[0];
+  const day: string | undefined = period?.icon?.indexOf('night') > -1 ? 'night' : 'day';
+
+  return (
+    <div onMouseEnter={handleMouseEvent} 
+         onMouseLeave={handleMouseEvent}
+         onClick={handleClickEvent}
+         className={`periodWeatherCard ${period?.isDaytime ? 'daytime' : 'nightTime'}`} 
+          style={hover || clicked?{
+            transition: '3s ease',
+            height: '100%',
+            maxHeight: '1000px',
+          }:{}}
+        >
+      <div className='periodRow1'>
+        <div className='column firstCol'>
+          <div className='periodName'>{period?.name}</div>
+        </div>
+        <div className='column secondCol'>
+          {weather ? <IconPicker weather={weather} time={day} /> : ''}
+          <div>{period?.probabilityOfPrecipitation?.value > 0 ? period?.probabilityOfPrecipitation?.value + '%' : ''}</div>
+        </div>
+
+        <div className='column thirdCol'>
+          <ProgressBar temp={period.temperature} />
+        </div>
+      </div>
+      <div className='periodRow2'>
+        <p>{period?.detailedForecast}</p>
+      </div>
+    </div>
+  )
 }
 
 // const PeriodWeather = ( { period } : Props ) => {
