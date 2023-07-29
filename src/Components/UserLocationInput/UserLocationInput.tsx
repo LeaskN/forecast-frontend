@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import './UserLocationInput.css';
 
 interface Props {
@@ -7,6 +7,7 @@ interface Props {
   state: string;
   zipcode: string;
   onClick: Function;
+  weatherDisplayed: Boolean;
 }
 
 interface Target {
@@ -14,12 +15,18 @@ interface Target {
   value: string
 }
 
-const UserLocationInput = ({
-    onClick,
-  }: Props) => {
-
+const UserLocationInput = ({ onClick, weatherDisplayed }: Props) => {
   const [userAddress, setUserAddress] = useState({street:'', city:'', state:'', zipcode:''})
+  const [isWeatherDisplayed, setWeatherDisplayed] = useState(weatherDisplayed);
+  
+  useEffect(() => {
+    setWeatherDisplayed(weatherDisplayed);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  const showInput = () => {
+    setWeatherDisplayed(!isWeatherDisplayed);
+  }
   const updateUserAddress = useCallback((target: Target) => {
     setUserAddress((prevUserAddress) => ({
       ...prevUserAddress,
@@ -28,7 +35,10 @@ const UserLocationInput = ({
   }, []);
 
   return (
-    <div className="address_input">
+    <>
+    { isWeatherDisplayed ? 
+    <button onClick={showInput} className='changeAddress'>Change Address</button> : 
+    <div className="addressInput">
       <h4>To get upcoming forecast enter an address below:</h4>
       <div className="row">
         <label htmlFor="street">Street</label>
@@ -70,10 +80,12 @@ const UserLocationInput = ({
         />
       </div>
 
-      <button onClick={() => onClick(userAddress)}>Submit</button>
+      <button onClick={() => {setWeatherDisplayed(!isWeatherDisplayed); onClick(userAddress)}}>Submit</button>
       <br/>
 
     </div>
+    }
+    </>
   );
 };
 
