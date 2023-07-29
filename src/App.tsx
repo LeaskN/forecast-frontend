@@ -1,9 +1,10 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import UserLocationInput from './Components/UserLocationInput/UserLocationInput';
-import PeriodWeather from './Components/PeriodWeather/PeriodWeather';
 import Spinner from './Components/Spinner/Spinner';
 import Clouds from './Components/Clouds/Clouds';
+import PeriodWeatherContainer from './Components/PeriodWeatherContainer/PeriodWeatherContainer';
+
 interface UserAddress {
   street: string;
   city: string;
@@ -20,7 +21,7 @@ function App() {
   const [userAddress, setUserAddress] = useState<UserAddress>({ street: '', city: '', state: '',   zipcode: ''});
   const [userLatLng, setUserLatLng] = useState<UserLatLng>({lat: '', lng: ''});
   const [spinner, setSpinner] = useState<boolean>(false)
-  const [upcomingForcast, setUpcomingForcast] = useState([]);
+  const [upcomingForecast, setUpcomingForecast] = useState([]);
   const [userCityFromBrowser, setUserCityFromBrowser] = useState({locality:''})
 
   useEffect(() => {
@@ -77,21 +78,19 @@ function App() {
       setSpinner(true);
       await fetch(`https://weather-backend-1dcb6a57dec1.herokuapp.com/weather/?lat=${userLatLng.lat}&lng=${userLatLng.lng}`)
         .then(res => res.json())
-        .then(res => setUpcomingForcast(res?.properties?.periods))
+        .then(res => setUpcomingForecast(res?.properties?.periods))
         .then(() => setSpinner(false))
     }
   }
 
   return (
     <div className="App">
+      {spinner ? <Spinner /> : ''}
       <Clouds />
       <UserLocationInput street='' city='' state='' zipcode='' onClick={(userAddress:UserAddress) => {setUserAddress(userAddress)}}/> 
       {userCityFromBrowser?.locality && userAddress?.city === '' ? userCityFromBrowser.locality : ''}
       {userAddress?.city?.length > 0 ? userAddress.city : ''}
-      <div className='periodWeatherContainer'>
-        {spinner ? <Spinner /> : ''}
-        {upcomingForcast.length > 0 && !spinner ? upcomingForcast.map((period) => <PeriodWeather period={period}/>): ''}
-      </div>
+      <PeriodWeatherContainer spinner={spinner} upcomingForecast={upcomingForecast} />
     </div>
   );
 }
