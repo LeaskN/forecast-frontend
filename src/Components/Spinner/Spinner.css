@@ -10,6 +10,16 @@
   left: calc(50% - 25px);
   top: 50%;
   position: fixed;
+  z-index: 1000;
+}
+
+.spinnerContainer{
+  position: fixed;
+  top:0;
+  left:0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.863);
 }
 
 @keyframes spin {
