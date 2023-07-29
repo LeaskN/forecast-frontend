@@ -24,7 +24,7 @@ body {
 
 @-webkit-keyframes animateCloud {
   0% {
-    margin-left: -750px;
+    margin-left: -550px;
   }
 
   100% {
@@ -34,7 +34,7 @@ body {
 
 @-moz-keyframes animateCloud {
   0% {
-    margin-left: -750px;
+    margin-left: -550px;
   }
 
   100% {
@@ -44,7 +44,7 @@ body {
 
 @keyframes animateCloud {
   0% {
-    margin-left: -750px;
+    margin-left: -550px;
   }
 
   100% {
