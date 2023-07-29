@@ -1,0 +1,23 @@
+.progressBarContainer{
+  height: 20px;
+  width: 100%;
+  background: linear-gradient(90deg, rgb(255, 255, 166), rgb(255, 68, 0));
+  border-radius: 50px;
+  margin: auto;
+}
+
+.progressBarFill{
+  background-color:transparent;
+  border-radius: inherit;
+  text-align: right;
+  height: 100%;
+}
+
+.progressBarLabel{
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  margin: auto;
+  line-height: 20px;
+  text-shadow: 1px 1px 1px black;
+}
