@@ -61,7 +61,6 @@ const PeriodWeather = ({ period }: Props) => {
           {weather ? <IconPicker weather={weather} time={day} /> : ''}
           <div>{period?.probabilityOfPrecipitation?.value > 0 ? period?.probabilityOfPrecipitation?.value + '%' : ''}</div>
         </div>
-
         <div className='column thirdCol'>
           <ProgressBar temp={period.temperature} />
         </div>
