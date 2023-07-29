@@ -1,14 +1,15 @@
-.address_input{
+.addressInput{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   max-width: 400px;
-  /* justify-self: center; */
   margin: auto;
   display: flex;
+  z-index: 5;
+  position: relative;
+  color: white;
+  text-shadow: 1px 1px 1px black;
 }
-
-
 
 .row{
   display: flex;
@@ -18,4 +19,19 @@
 
 .row #country{
   width: 177px;
+}
+
+.changeAddress{
+  cursor: pointer;
+  margin: 10px;
+  color: rgb(var(--secondary-color));
+  background-color: rgb(var(--bg-color), .8);
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 1;
+  position: relative;
+}
+
+.changeAddress:hover{
+  background-color: rgb(var(--bg-color), 1);
 }
