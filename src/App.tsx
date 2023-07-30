@@ -109,9 +109,6 @@ function App() {
         .then(() => setSpinner(false))
     }
   }
-  console.log('dayForecast', dayForecast)
-
-
 
   return (
     <div className="App">
