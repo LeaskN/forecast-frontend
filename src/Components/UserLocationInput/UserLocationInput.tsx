@@ -19,14 +19,11 @@ const UserLocationInput = ({ onClick, weatherDisplayed }: Props) => {
   const [userAddress, setUserAddress] = useState({street:'', city:'', state:'', zipcode:''})
   const [isWeatherDisplayed, setWeatherDisplayed] = useState(weatherDisplayed);
   
+  // On mount, decide if we show the input based on if we have weather showing already
   useEffect(() => {
     setWeatherDisplayed(weatherDisplayed);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [weatherDisplayed]);
 
-  const showInput = () => {
-    setWeatherDisplayed(!isWeatherDisplayed);
-  }
   const updateUserAddress = useCallback((target: Target) => {
     setUserAddress((prevUserAddress) => ({
       ...prevUserAddress,
@@ -36,8 +33,11 @@ const UserLocationInput = ({ onClick, weatherDisplayed }: Props) => {
 
   return (
     <>
-    { isWeatherDisplayed ? 
-    <button onClick={showInput} className='changeAddress'>Change Address</button> : 
+    {/* If we have weather displayed, then dont show input, just show button to open the change address input*/}
+    { !isWeatherDisplayed ?  
+    <button 
+      onClick={() => setWeatherDisplayed(!isWeatherDisplayed)} 
+      className='changeAddress'>Change Address</button> : 
     <div className="addressInput">
       <h4>To get upcoming forecast enter an address below:</h4>
       <div className="row">
@@ -79,8 +79,8 @@ const UserLocationInput = ({ onClick, weatherDisplayed }: Props) => {
           onChange={(e) => updateUserAddress(e.target)}
         />
       </div>
-
-      <button onClick={() => {setWeatherDisplayed(!isWeatherDisplayed); onClick(userAddress)}}>Submit</button>
+      {/* When clicking submit, hide the input again */}
+      <button onClick={() => {setWeatherDisplayed(false); onClick(userAddress)}}>Submit</button>
       <br/>
 
     </div>
