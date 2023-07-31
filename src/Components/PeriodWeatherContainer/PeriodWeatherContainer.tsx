@@ -1,5 +1,6 @@
 import React from 'react';
 import PeriodWeather from '../PeriodWeather/PeriodWeather';
+import { generateKey } from '../../Functions/HelperFunctions';
 import './PeriodWeatherContainer.css';
 
 interface Props{
@@ -30,7 +31,7 @@ interface Period {
 export default function PeriodWeatherContainer({spinner, upcomingForecast}:Props){
   return(
     <div className='periodWeatherContainer'>
-      {upcomingForecast.length > 0 && !spinner ? upcomingForecast.map((period) => <PeriodWeather period={period}/>): ''}
+      {upcomingForecast.length > 0 && !spinner ? upcomingForecast.map((period) => <PeriodWeather key={generateKey(JSON.stringify(period))} period={period}/>): ''}
     </div>
   )
 
