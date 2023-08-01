@@ -4,7 +4,7 @@ import { generateKey } from '../../Functions/HelperFunctions';
 import './PeriodWeatherContainer.css';
 
 interface Props{
-  spinner: boolean;
+  loader: boolean;
   upcomingForecast: Period[];
 }
 interface Period {
@@ -28,10 +28,10 @@ interface Period {
     value: number;
   };
 }
-export default function PeriodWeatherContainer({spinner, upcomingForecast}:Props){
+export default function PeriodWeatherContainer({loader, upcomingForecast}:Props){
   return(
     <div className='periodWeatherContainer'>
-      {upcomingForecast.length > 0 && !spinner ? upcomingForecast.map((period) => <PeriodWeather key={generateKey(JSON.stringify(period))} period={period}/>): ''}
+      {upcomingForecast.length > 0 && !loader ? upcomingForecast.map((period) => <PeriodWeather key={generateKey(JSON.stringify(period))} period={period}/>): ''}
     </div>
   )
 
