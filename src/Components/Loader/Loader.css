@@ -1,0 +1,30 @@
+#loading {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgb(92, 217, 255);
+  border-radius: 50%;
+  border-top-color: #ff3838;
+  animation: spin .5s ease-in-out infinite;
+  -webkit-animation: spin .5s ease-in-out infinite;
+  left: calc(50% - 25px);
+  top: 50%;
+  position: fixed;
+  z-index: 1000;
+}
+
+.spinnerContainer{
+  position: fixed;
+  top:0;
+  left:0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.863);
+}
+
+@keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
