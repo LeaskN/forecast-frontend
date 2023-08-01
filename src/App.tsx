@@ -128,7 +128,7 @@ function App() {
           onClick={(userAddress: UserAddress) => { setUserAddress(userAddress) }}
         />
       }
-      {dayForecast !== undefined ?
+      {dayForecast !== undefined && dayForecast.length > 0?
         <TodaysForecast dayForecast={dayForecast} />
         : ''}
       {userCityFromBrowser?.locality && userAddress?.city === '' ?
