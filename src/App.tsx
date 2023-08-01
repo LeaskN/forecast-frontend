@@ -1,10 +1,10 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import UserLocationInput from './Components/UserLocationInput/UserLocationInput';
-import Spinner from './Components/Spinner/Spinner';
+import Loader from './Components/Loader/Loader';
 import Clouds from './Components/Clouds/Clouds';
 import PeriodWeatherContainer from './Components/PeriodWeatherContainer/PeriodWeatherContainer';
-import IconPicker from './Components/IconPicker/IconPicker';
+import TodaysForecast from './Components/TodaysForecast/TodaysForecast';
 
 interface UserAddress {
   street: string;
@@ -21,17 +21,17 @@ interface UserLatLng {
 function App() {
   const [userAddress, setUserAddress] = useState<UserAddress>({ street: '', city: '', state: '', zipcode: '' });
   const [userLatLng, setUserLatLng] = useState<UserLatLng>({ lat: '', lng: '' });
-  const [spinner, setSpinner] = useState<boolean>(false)
+  const [loader, setSpinner] = useState<boolean>(false)
   const [upcomingForecast, setUpcomingForecast] = useState([]);
   const [dayForecast, setDayForecast] = useState<any>([]);
   const [userCityFromBrowser, setUserCityFromBrowser] = useState({ locality: '' });
 
   let night = false;
 
-  function isNight(){
+  function isNight() {
     const hours = new Date().getHours()
     const isDayTime = hours > 6 && hours < 20;
-    if(isDayTime === true){
+    if (isDayTime === true) {
       night = true;
     }
   }
@@ -112,34 +112,25 @@ function App() {
 
   return (
     <div className="App">
-      {spinner ? <Spinner /> : ''}
+      {/* Background/hidden elements start*/}
+      {loader ? <Loader /> : ''}
       <div className={!night ? `nightWrap` : ''}></div>
       <Clouds />
-      <UserLocationInput street='' city='' state='' zipcode='' weatherDisplayed={upcomingForecast.length > 0 ? false : true} onClick={(userAddress: UserAddress) => { setUserAddress(userAddress) }} />
+      {/* Background/hidden elements end*/}
+      {/* UserLocation input only shows if we can't collect data about the users position */}
+      {loader ? '' :
+        <UserLocationInput
+          street=''
+          city=''
+          state=''
+          zipcode=''
+          weatherDisplayed={upcomingForecast.length > 0 ? false : true}
+          onClick={(userAddress: UserAddress) => { setUserAddress(userAddress) }}
+        />
+      }
       {dayForecast !== undefined ?
-      <div className='todaysRowContainer'>
-        <span className='todaysRowHeader'>Current Weather: {dayForecast?.[0]?.shortForecast}</span>
-        <div className='todaysRow'>
-          <br/>
-          {dayForecast.slice(1,26).map((hour:any) => {
-            const weatherInfo: string | undefined = hour?.icon?.indexOf('day') > -1 ? hour?.icon?.split('day')[1] : hour?.icon?.split('night')[1];
-            const weather: string | undefined = weatherInfo?.split('/')?.[1]?.split(',')[0];
-            const d = new Date(hour?.startTime)
-            let hours = d.getHours();
-            const suffix = (hours >= 12)? 'pm' : 'am';
-            hours = (hours > 12)? hours - 12 : hours;
-            hours = (`${hours}` === '0')? 12 : hours;
-            return (
-            <div className='todaysCol'>
-              <div className='todaysLine1'>{hours}{suffix}</div>
-              <div className='todaysLine2'><IconPicker weather={weather} time={'day'}/></div>
-              <div className='todaysLine3'>{hour?.temperature}&deg;</div>
-            </div>
-            )
-          })}
-        </div>
-      </div>
-      :''}
+        <TodaysForecast dayForecast={dayForecast} />
+        : ''}
       {userCityFromBrowser?.locality && userAddress?.city === '' ?
         <div className='periodWeatherTopper'>
           7-Day Forecast in {userCityFromBrowser.locality}
@@ -150,7 +141,7 @@ function App() {
           7-Day Forecast in {userAddress.city}
         </div>
         : ''}
-      <PeriodWeatherContainer spinner={spinner} upcomingForecast={upcomingForecast} />
+      <PeriodWeatherContainer loader={loader} upcomingForecast={upcomingForecast} />
     </div>
   );
 }
