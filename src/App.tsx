@@ -128,9 +128,8 @@ function App() {
           onClick={(userAddress: UserAddress) => { setUserAddress(userAddress) }}
         />
       }
-      {dayForecast !== undefined && dayForecast.length > 0?
-        <TodaysForecast dayForecast={dayForecast} />
-        : ''}
+      {dayForecast === undefined && dayForecast.length === 0 ? '' :
+       <TodaysForecast dayForecast={dayForecast} />}
       {userCityFromBrowser?.locality && userAddress?.city === '' ?
         <div className='periodWeatherTopper'>
           7-Day Forecast in {userCityFromBrowser.locality}
