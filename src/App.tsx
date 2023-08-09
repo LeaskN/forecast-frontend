@@ -11,6 +11,7 @@ interface UserAddress {
   city: string;
   state: string;
   zipcode: string;
+  numberOfDays: number;
 }
 
 interface UserLatLng {
@@ -19,7 +20,7 @@ interface UserLatLng {
 }
 
 function App() {
-  const [userAddress, setUserAddress] = useState<UserAddress>({ street: '', city: '', state: '', zipcode: '' });
+  const [userAddress, setUserAddress] = useState<UserAddress>({ street: '', city: '', state: '', zipcode: '', numberOfDays: 7 });
   const [userLatLng, setUserLatLng] = useState<UserLatLng>({ lat: '', lng: '' });
   const [loader, setSpinner] = useState<boolean>(false)
   const [upcomingForecast, setUpcomingForecast] = useState([]);
@@ -124,6 +125,7 @@ function App() {
           city=''
           state=''
           zipcode=''
+          numberOfDays={7}
           weatherDisplayed={upcomingForecast.length > 0 ? false : true}
           onClick={(userAddress: UserAddress) => { setUserAddress(userAddress) }}
         />

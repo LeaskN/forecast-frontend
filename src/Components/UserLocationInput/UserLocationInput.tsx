@@ -6,6 +6,7 @@ interface Props {
   city: string;
   state: string;
   zipcode: string;
+  numberOfDays: number;
   onClick: Function;
   weatherDisplayed: Boolean;
 }
@@ -16,7 +17,7 @@ interface Target {
 }
 
 const UserLocationInput = ({ onClick, weatherDisplayed }: Props) => {
-  const [userAddress, setUserAddress] = useState({street:'', city:'', state:'', zipcode:''})
+  const [userAddress, setUserAddress] = useState({street:'', city:'', state:'', zipcode:'', numberOfDays: 7})
   const [isWeatherDisplayed, setWeatherDisplayed] = useState(weatherDisplayed);
   
   // On mount, decide if we show the input based on if we have weather showing already
@@ -77,6 +78,18 @@ const UserLocationInput = ({ onClick, weatherDisplayed }: Props) => {
           id="zipcode"
           value={userAddress.zipcode}
           onChange={(e) => updateUserAddress(e.target)}
+        />
+      </div>
+      
+      <div className="row">
+        <label htmlFor="numberOfDays">Number Of Days</label>
+        <input 
+          type="number" 
+          id="numberOfDays" 
+          value={userAddress.numberOfDays} 
+          min="1" 
+          max="7"
+          onChange={(e) => updateUserAddress(e.target)}  
         />
       </div>
       {/* When clicking submit, hide the input again */}
