@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PeriodWeather from '../PeriodWeather/PeriodWeather';
 import { generateKey } from '../../Functions/HelperFunctions';
 import './PeriodWeatherContainer.css';
@@ -6,6 +6,7 @@ import './PeriodWeatherContainer.css';
 interface Props{
   loader: boolean;
   upcomingForecast: Period[];
+  numberOfDays: number;
 }
 interface Period {
   icon: string;
@@ -28,11 +29,18 @@ interface Period {
     value: number;
   };
 }
-export default function PeriodWeatherContainer({loader, upcomingForecast}:Props){
+export default function PeriodWeatherContainer({loader, upcomingForecast, numberOfDays}:Props){
   return(
     <div className='periodWeatherContainer'>
-      {upcomingForecast.length > 0 && !loader ? upcomingForecast.map((period) => <PeriodWeather key={generateKey(JSON.stringify(period))} period={period}/>): ''}
+      {upcomingForecast.length > 0 && !loader ? 
+        upcomingForecast.reduce<ReactNode[]>((a, c, i) => {
+          const currentDay = i+1;
+          if(currentDay <= numberOfDays *2){
+            return [...a, <PeriodWeather key={generateKey(JSON.stringify(c))} period={c}/>];
+          }
+          return a;
+        }, [])
+        : ''}
     </div>
   )
-
 }

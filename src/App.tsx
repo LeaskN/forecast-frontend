@@ -142,7 +142,7 @@ function App() {
           7-Day Forecast in {userAddress.city}
         </div>
         : ''}
-      <PeriodWeatherContainer loader={loader} upcomingForecast={upcomingForecast} />
+      <PeriodWeatherContainer loader={loader} upcomingForecast={upcomingForecast} numberOfDays={userAddress.numberOfDays} />
     </div>
   );
 }
